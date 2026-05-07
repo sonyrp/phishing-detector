@@ -37,6 +37,16 @@ Estas métricas muestran que el modelo logra identificar correctamente la mayor�
 
 ---
 
+##  Distribución de clases
+
+![Distribución](data/distribucion.png)
+
+---
+
+##  Matriz de confusión
+
+![Matriz](data/confusion_matrix.png)
+
 #  ¿Cómo funciona?
 
 El sistema sigue un pipeline de procesamiento de datos:

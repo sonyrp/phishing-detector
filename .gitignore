@@ -1,0 +1,32 @@
+# Entorno virtual
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Modelos entrenados (son pesados, se regeneran)
+models/*.pkl
+
+# Datos crudos (se descargan con el script)
+data/emails.tsv
+
+# VS Code
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Variables de entorno (NUNCA subir claves)
+.env
+*.env

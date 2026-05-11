@@ -1,5 +1,5 @@
 #  Phishing Detector con NLP y Machine Learning
-
+![CI](https://github.com/sonyrp/phishing-detector/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![Flask](https://img.shields.io/badge/Flask-2.x-green)
 ![ML](https://img.shields.io/badge/Machine%20Learning-Scikit--learn-orange)

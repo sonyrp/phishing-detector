@@ -1,6 +1,5 @@
 name: CI — Phishing Detector
 
-# Se activa en cada push y pull request a main
 on:
   push:
     branches: [ main ]
@@ -13,68 +12,58 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Descargar el código del repo
       - name: Checkout código
         uses: actions/checkout@v4
 
-      # 2. Configurar Python
       - name: Setup Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 3. Cachear dependencias para que sea más rápido
       - name: Cache pip
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
 
-      # 4. Instalar dependencias
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest pytest-cov bandit
 
-      # 5. Descargar recursos de NLTK
       - name: Descargar recursos NLTK
         run: |
           python -c "
           import nltk
           nltk.download('stopwords')
           nltk.download('punkt')
+          nltk.download('punkt_tab')
           nltk.download('wordnet')
           nltk.download('omw-1.4')
           "
 
-      # 6. Correr tests del preprocesador
       - name: Tests de NLP
         run: |
           pytest tests/test_preprocessor.py -v --tb=short
 
-      # 7. Descargar datos y entrenar modelo
       - name: Entrenar modelo
         run: |
           python download_data.py
           cd src && python train_model.py
 
-      # 8. Correr todos los tests con reporte de cobertura
       - name: Tests completos con cobertura
         run: |
           pytest tests/ -v --cov=src --cov-report=term-missing
 
-      # 9. Análisis de seguridad del código con Bandit
-      # Bandit escanea el código Python buscando vulnerabilidades comunes
       - name: Análisis de seguridad (Bandit)
         run: |
           bandit -r src/ api/ -ll --format txt || true
 
-      # 10. Verificar que la API responde correctamente
       - name: Test de integración — API
         run: |
           cd api && python app.py &
-          sleep 3
+          sleep 5
           curl -f http://localhost:5000/health
           curl -f -X POST http://localhost:5000/predecir \
             -H "Content-Type: application/json" \

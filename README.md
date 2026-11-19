@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.svg" width="100%" alt="phishing-detector: detecta emails y mensajes de phishing con NLP y Machine Learning"/>
+</p>
+
 #  Phishing Detector con NLP y Machine Learning
 ![CI](https://github.com/sonyrp/phishing-detector/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
